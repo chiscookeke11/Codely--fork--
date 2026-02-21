@@ -84,7 +84,7 @@ export default function SnippetsPage() {
     if (!confirm("Delete this snippet?")) return;
     try {
       const res = await fetch(`/api/snippets/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Failed to delete snippet");
+      if (!res.ok) throw new Error("Failed to delete snippet!");
       await fetchSnippets();
     } catch (error) {
       console.error("Error deleting snippet:", error);
