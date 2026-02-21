@@ -58,6 +58,8 @@ export default function SnippetsPage() {
 		language: "javascript",
 		tags: "",
 	});
+	const [saving, setSaving] = useState(false);
+	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
 		fetchSnippets();
@@ -78,6 +80,8 @@ export default function SnippetsPage() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setSaving(true);
+		setError(null);
 		try {
 			const payload = {
 				...formData,
@@ -97,8 +101,11 @@ export default function SnippetsPage() {
 			if (!res.ok) throw new Error("Failed to save snippet");
 			await fetchSnippets();
 			handleCancel();
-		} catch (e) {
+		} catch (e: any) {
 			console.error(e);
+			setError(e.message || "Failed to save snippet. Please try again.");
+		} finally {
+			setSaving(false);
 		}
 	};
 
@@ -136,6 +143,7 @@ export default function SnippetsPage() {
 	const handleCancel = () => {
 		setShowForm(false);
 		setEditingId(null);
+		setError(null);
 		setFormData({
 			title: "",
 			description: "",
@@ -178,6 +186,11 @@ export default function SnippetsPage() {
 						<form
 							onSubmit={handleSubmit}
 							className='space-y-6'>
+							{error && (
+								<div className='p-3 rounded bg-red-500/20 border border-red-500/50 text-red-200 text-sm'>
+									{error}
+								</div>
+							)}
 							<div className='space-y-2'>
 								<Label
 									htmlFor='title'
@@ -274,8 +287,15 @@ export default function SnippetsPage() {
 							<div className='flex gap-4'>
 								<Button
 									type='submit'
-									className='bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0'>
-									{editingId ? <Loader/> : "Save Snippet"}
+									disabled={saving}
+									className='bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 min-w-[120px]'>
+									{saving ? (
+										<Loader />
+									) : editingId ? (
+										"Update Snippet"
+									) : (
+										"Save Snippet"
+									)}
 								</Button>
 								<Button
 									type='button'
@@ -292,7 +312,7 @@ export default function SnippetsPage() {
 				{/* Grid */}
 				{loading ? (
 					<div className="w-full h-full flex items-center justify-center " >
-<Loader/>
+						<Loader />
 					</div>
 				) : snippets.length === 0 ? (
 					<div className='text-center text-gray-400 py-12'>
