@@ -133,13 +133,20 @@ Foundation for on-chain snippet verification
 
 🔍 Search and filtering
 
-🌙 Dark mode support
+### 🌙 Dark Mode Support
+Support for dark mode is planned but not yet implemented for the new landing page.
 
-📋 One-click copy functionality
+---
 
-🔒 Private & shared snippets
+## 🎨 Design
 
-🤝 Contributing
+The landing page design is available on Figma. External contributors can use it as a reference for UI consistency.
+
+- 📐 **Figma Design Link**: [Codely Landing Page](https://www.figma.com/design/codely-landing-page)
+
+---
+
+## 🤝 Contributing
 
 Contributions are welcome and appreciated!
 
