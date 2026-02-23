@@ -146,17 +146,11 @@ The landing page design is available on Figma. External contributors can use it 
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome and appreciated!
+Contributions are welcome and highly appreciated! We follow a structured contribution process to maintain code quality and consistency.
 
-Fork the repository
-
-Create a new branch
-
-Commit your changes
-
-Open a Pull Request
+**Please read our comprehensive [CONTRIBUTING.md](./CONTRIBUTING.md) guide before starting to contribute.**
 
 📄 License
 
